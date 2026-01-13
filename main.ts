@@ -20,7 +20,9 @@ app.get("/hello", function(ctx: Context){
 const { serve } = Deno;
 
 const hostPort = {
-    hostname: "127.0.0.1",
-    port: 8000
+    hostname: Deno.networkInterfaces()[1].address,
+    port: 7000
 }
+
+console.log(Deno.networkInterfaces())
 serve(hostPort, app.fetch);
