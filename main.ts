@@ -1,13 +1,17 @@
-import { getAvailablePort } from "@std/net"
+import { getAvailablePort } from "@std/net";
 import { getNetworkAddress } from "@std/net/unstable-get-network-address";
+import { Hono } from "@hono/hono";
+import type { Context } from "@hono/hono"
 
-function App(req: Request){
-    return new Response("Welcome to my pages",{
-        headers: {
-            "content-type": "text/html"
-        }
+const app = new Hono();
+
+function getRoot(ctx: Context){
+    return ctx.json({
+        "message": "Ok"
     });
 }
+
+app.get("/", getRoot);
 
 const { serve } = Deno;
 
@@ -16,4 +20,4 @@ const hostPort = {
     port: getAvailablePort()
 }
 
-serve(hostPort, App);
+serve(hostPort, app.fetch);
