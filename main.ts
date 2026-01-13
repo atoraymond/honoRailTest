@@ -1,3 +1,6 @@
+import { getAvailablePort } from "@std/net"
+import { getNetworkAddress } from "@std/net/unstable-get-network-address";
+
 function App(req: Request){
     return new Response("Welcome to my pages",{
         headers: {
@@ -9,8 +12,8 @@ function App(req: Request){
 const { serve } = Deno;
 
 const hostPort = {
-    hostname: "127.0.0.1",
-    port: 7000
+    hostname: getNetworkAddress()!,
+    port: getAvailablePort()
 }
 
 serve(hostPort, App);
