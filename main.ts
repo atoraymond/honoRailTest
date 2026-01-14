@@ -1,5 +1,7 @@
 import { Hono } from "@hono/hono";
 import type { Context } from "@hono/hono"
+import { getAvailablePort } from "@std/net"
+import { getNetworkAddress} from "@std/net/unstable-get-network-address";
 
 const app = new Hono();
 
@@ -14,8 +16,8 @@ app.get("/", getRoot);
 const { serve } = Deno;
 
 const hostPort = {
-    hostname: "127.0.0.1",
-    port: 5000
+    hostname: getNetworkAddress()!,
+    port: getAvailablePort()
 }
 
 serve(hostPort,app.fetch);
