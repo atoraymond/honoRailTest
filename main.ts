@@ -13,9 +13,4 @@ app.get("/", getRoot);
 
 const { serve } = Deno;
 
-const hostPort = {
-    hostname: "127.0.0.1",
-    port: 9000
-}
-
-serve(hostPort, app.fetch);
+serve(app.fetch);
