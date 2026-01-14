@@ -1,0 +1,5 @@
+[build]
+
+command = "deno run --allow-net main.ts"
+
+publish = "."
