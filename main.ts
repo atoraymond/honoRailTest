@@ -1,5 +1,3 @@
-import { getAvailablePort } from "@std/net";
-import { getNetworkAddress } from "@std/net/unstable-get-network-address";
 import { Hono } from "@hono/hono";
 import type { Context } from "@hono/hono"
 
@@ -16,8 +14,8 @@ app.get("/", getRoot);
 const { serve } = Deno;
 
 const hostPort = {
-    hostname: getNetworkAddress()!,
-    port: getAvailablePort()
+    hostname: "127.0.0.1",
+    port: 9000
 }
 
 serve(hostPort, app.fetch);
